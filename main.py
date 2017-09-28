@@ -18,11 +18,13 @@ def my_regex(data):
     # righteq = re.findall('(?=\=>).*[A-Z()!]\s*(?=\#)|(?=\<=>).*[A-Z()!]\s*(?=\#)', line.replace(' ', ''))
     eq = re.findall('.*[A-Z()!]\s*(?=\#)|.*[A-Z()!]\s*(?=\#)', line.replace(' ', ''))
     letters = re.findall('[A-Z]', line)
-    print(letters)
-    print(eq)
+    #print(letters)
+    #print(eq)
     letters = list(set(letters))
     letters.sort()
-    print(letters)
+    #print(letters)
+    lists = [eq, letters]
+    return lists
 
 def parse_arg(argv):
     parser = argparse.ArgumentParser()
@@ -32,7 +34,8 @@ def parse_arg(argv):
 
 def main(argv):
     fd = parse_arg(argv)
-    my_regex(fd)
+    lists = my_regex(fd)
+    print(lists[0])
 
 if __name__ == "__main__":
     main(sys.argv[1:])
