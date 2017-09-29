@@ -1,9 +1,17 @@
 #!/usr/bin/python3
 
 import sys
+import re
 from parsing import parse_arg
 from regex import my_regex
 from model import Letter
+
+def set_up(letters, true):
+    for char in letters:
+        for i in range(len(true[0])):
+            if char.name is true[0][i]:
+                char.status = True
+                char.value = True
 
 def main(argv):
     fd = parse_arg(argv)
@@ -16,7 +24,7 @@ def main(argv):
     question = lists[3]
     lists.clear()
     set_up(letters, true)
-    graph = create_eq_graph(eq, letters)
+    # graph = create_eq_graph(eq, letters)
 
 
 
