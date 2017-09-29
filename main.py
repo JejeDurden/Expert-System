@@ -25,9 +25,8 @@ def main(argv):
     lists.clear()
     set_up(letters, true)
     graph = create_eq_graph(eq, letters)
-
-
-
+    start_points = starting_points(eq, letters)
+    solve(graph, start_points)
 
 if __name__ == "__main__":
     main(sys.argv[1:])

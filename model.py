@@ -4,6 +4,9 @@ class Letter:
         self.value = False
         self.conn = {}
         self.name = name
+        
+    def __str__(self):
+        return self.name
 
 class Equation:
     def __init__(self, name):
@@ -20,4 +23,7 @@ class Equation:
     def get_right(self, name):
         for i in range(len(name)):
             if name[i] is '>':
+                i += 1
                 return (name[i:])
+    def __str__(self):
+        return self.name
