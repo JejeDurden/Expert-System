@@ -15,11 +15,33 @@ def open_file(string):
 
 def parse_eq(equations):
     for eq in equations:
-        for char in eq:
-            if is_op(char) and is_op(char - 1):
+        for i in range(len(eq) - 1):
+            char = eq[i]
+            next_char = eq[i + 1]
+            if i == 0 and is_op(char):
+                print ("Error : Fact cannot start with operator.")
+                sys.exit()
+            if is_valid(char) is False or is_valid(next_char) is False:
+                print ("Error : Some char are not valid.")
+                sys.exit()
+            elif is_op(char) and is_op(next_char):
                 print ("Error : two operators cannot follow each other.")
                 sys.exit()
-            if is_op(char) and (char - 1 is '(' or char + 1 is ')'):
-                print ("Error : bad placement of brackets or {0}")
+            elif is_op(char) and (eq[i - 1] is '(' or next_char is ')'):
+                print ("Error : bad placement of brackets or operand sign.")
+                sys.exit()
+            elif char.isalpha() and next_char.isalpha():
+                print ("Error : two letters cannot follow each other.")
+                sys.exit()
+            elif char == next_char:
+                print ("Error : two identical char cannot follow each other.")
+                sys.exit()
+
 def is_op(a):
     return (a is '+' or a is '^' or a is '|')
+
+def is_valid(a):
+    return ((a.isalpha() and a.isupper()) or is_valid_sign(a))
+
+def is_valid_sign(a):
+    return (a is '<' or a is '>' or a is '=' or a is '(' or a is ')' or a is '!' or is_op(a))

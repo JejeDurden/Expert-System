@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 import sys
-import re
 from parsing import parse_arg
 from regex import my_regex
 from model import Letter
+from algo import create_eq_graph
 
 def set_up(letters, true):
     for char in letters:
@@ -24,7 +24,7 @@ def main(argv):
     question = lists[3]
     lists.clear()
     set_up(letters, true)
-    # graph = create_eq_graph(eq, letters)
+    graph = create_eq_graph(eq, letters)
 
 
 
