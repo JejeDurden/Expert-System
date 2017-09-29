@@ -11,11 +11,8 @@ def my_regex(data):
     eq = re.findall('.*[A-Z()!]\s*(?=\#)|.*[A-Z()!]\s*(?=\#)', line.replace(' ', ''))
     letters = re.findall('[A-Z]', line)
     letters.sort()
-
     true = re.findall('(?<=\n=).*' ,line)#ne doit pas etre en premiere ligne
-    print(true)
     question = re.findall('(?<=\n\?).*' ,line)#ne doit pas etre en premiere ligne
-    print(question)
 
     lists = [eq, letters, true, question]
     letters = list(set(letters))
