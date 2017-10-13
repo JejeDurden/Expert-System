@@ -1,32 +1,25 @@
 from parsing import parse_eq
 from model import Equation
 
-def create_eq_graph(equations, letters):
+def create_eq(equations):
     parse_eq(equations)
     eq = []
     for string in equations:
         eq.append(Equation(string))
+    return eq
+
+def create_eq_graph_reverse(eq, letters):
     graph = {}
     for item in eq:
         graph[item] = []
-        # print(item.name)
         letter_right = get_letters(item.right)
         for leq in eq:
             letter_left = get_letters(leq.left)
             if not set(letter_left).isdisjoint(letter_right):
                 graph[item].append(leq)
-        print(item)
-        print("lol")
-        for i in range(len(graph[item])):
-            print(graph[item][i])
-        print("coucou\n\n")
     return graph
 
-def starting_points(equations, letters):
-    parse_eq(equations)
-    eq = []
-    for string in equations:
-        eq.append(Equation(string))
+def starting_points(eq, letters):
     for item in eq:
         missing = missing_values(item, letters)
         if not missing:
@@ -35,7 +28,7 @@ def starting_points(equations, letters):
     for item in eq:
         if item.status is True:
             start_points.append(item)
-            # print(item.name)
+    return start_points
 
 def get_letters(string):
     letters = []
@@ -53,16 +46,18 @@ def missing_values(eq, letters):
                     list_missing_letter.append(letter)
     return list_missing_letter
 
-def solve(graph, start_point):
-    for item in graph:
-        left_eq = Equation(item.name)
-        #print(left_eq.get_left(item.name))
-        #print(list(left_eq.get_left(item.name)))
-        #print ("\n")
-        # print(Equation(item.name))
-    #print ("\n")
-    #print (start_point)
+def solve(graph, eq, question, letters):
+    answer = {}
+    for q in question:
+        for l in letters:
+            if q == l:
+                if l.status == True:
+                    answer[q] = l.value
+    for key, value in graph.items():
+        print(key)
+        #for i in key:
+        #if q ==
+        for i in range(len(value)):
+            print(value[i].name)
+        print("\n\n\n")
     return 0
-
-def read_equation(equations):
-    pass
