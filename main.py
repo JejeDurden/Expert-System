@@ -5,6 +5,8 @@ from parsing import parse_arg
 from regex import my_regex
 from model import Letter
 from algo import create_eq_graph
+from algo import starting_points
+from algo import solve
 
 def set_up(letters, true):
     for char in letters:
