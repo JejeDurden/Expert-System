@@ -19,6 +19,17 @@ def create_eq_graph_reverse(eq, letters):
                 graph[item].append(leq)
     return graph
 
+def create_eq_graph(eq, letters):
+    graph = {}
+    for item in eq:
+        graph[item] = []
+        letter_left = get_letters(item.left)
+        for leq in eq:
+            child_right = get_letters(leq.right)
+            if not set(child_right).isdisjoint(letter_left):
+                graph[item].append(leq)
+    return graph
+
 def starting_points(eq, letters):
     for item in eq:
         missing = missing_values(item, letters)
@@ -53,11 +64,12 @@ def solve(graph, eq, question, letters):
             if q == l:
                 if l.status == True:
                     answer[q] = l.value
-    for key, value in graph.items():
-        print(key)
-        #for i in key:
-        #if q ==
-        for i in range(len(value)):
-            print(value[i].name)
-        print("\n\n\n")
+    for i in range(len(question)):
+        for key, value in graph.items():
+            for char in key.right:
+                if char == question[i]:
+                    for l in range(len(eq)):
+                        if key.name == eq[l].name:
+                            print(str(eq[l].left) + " => " + eq[l].right)
+        #print("\n\n\n")
     return 0

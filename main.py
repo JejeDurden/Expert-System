@@ -44,7 +44,7 @@ def main(argv):
     lists.clear()
     letters = set_up_letters(letters, true)
     eq = create_eq(eq)
-    graph = create_eq_graph_reverse(eq, letters)
+    graph_reverse = create_eq_graph_reverse(eq, letters)
     graph = create_eq_graph(eq, letters)
     start_points = starting_points(eq, letters)
     eq = set_up_eq(eq, letters)
