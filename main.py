@@ -4,7 +4,7 @@ import sys
 from parsing import parse_arg
 from regex import my_regex
 from model import Letter, Equation
-from algo import create_eq_graph_reverse, create_eq_graph, starting_points, solve, create_eq
+from algo import create_eq_graph_reverse, create_eq_graph, starting_points, ex_sys, create_eq
 
 def set_up_letters(letters, true):
     for char in letters:
@@ -48,7 +48,7 @@ def main(argv):
     graph = create_eq_graph(eq, letters)
     start_points = starting_points(eq, letters)
     eq = set_up_eq(eq, letters)
-    solve(graph, eq, question, letters)
+    ex_sys(graph, question, letters)
 
 if __name__ == "__main__":
     main(sys.argv[1:])

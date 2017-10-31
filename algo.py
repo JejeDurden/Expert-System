@@ -57,19 +57,36 @@ def missing_values(eq, letters):
                     list_missing_letter.append(letter)
     return list_missing_letter
 
-def solve(graph, eq, question, letters):
-    answer = {}
+def get_simple_answers(question, answer, letters):
     for q in question:
         for l in letters:
-            if q == l:
+            if q == l.name:
                 if l.status == True:
                     answer[q] = l.value
+                    question.remove(q)
+    return question, answer
+
+def solve(equation, question):
+    if equation.left[1] == '+':
+        return(AND(equation.left[0], equation.left[2]))
+    if equation.left[1] == '|':
+        return(AND(equation.left[0], equation.left[2]))
+    if equation.left[1] == '^':
+        return (AND(equation.left[0], equation.left[2]))
+
+def get_answers(graph, question, letters, i):
+    for key, value in graph.items():
+        for char in key.right:
+            if char == question[i]:
+                if key.status == True:
+                    print(key.left)
+                    answer = solve(key, question[i], letters)
+                #backward_chaining(eq[l])
+    return ({question[i]: True})
+
+def ex_sys(graph, question, letters):
+    answer = {}
+    question, answer = get_simple_answers(question, answer, letters)
     for i in range(len(question)):
-        for key, value in graph.items():
-            for char in key.right:
-                if char == question[i]:
-                    for l in range(len(eq)):
-                        if key.name == eq[l].name:
-                            print(str(eq[l].left) + " => " + eq[l].right)
-        #print("\n\n\n")
-    return 0
+        answer.update(get_answers(graph, question, letters, i))
+    print ()
